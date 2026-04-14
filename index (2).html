@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Weekly Update — Joy</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#1a1814;--ink-2:#4a4740;--ink-3:#9a9590;
+  --rule:#e4dfd9;--page:#faf8f5;--cream:#f3efe9;--accent:#c84b2f;
+  --green:#2d6a4f;--green-bg:#e8f3ee;
+  --amber:#955a08;--amber-bg:#fdf0e4;
+  --red:#a32d2d;--red-bg:#fbeded;
+  --blue:#1d4e89;--blue-bg:#e8eef7;
+  --purple:#534AB7;--purple-bg:#EEEDFE;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'DM Sans',sans-serif;background:var(--page);color:var(--ink);min-height:100vh}
+
+.masthead{border-bottom:2px solid var(--ink);padding:1.75rem 3rem 1.25rem;display:flex;align-items:flex-end;justify-content:space-between;gap:1rem;flex-wrap:wrap}
+.kicker{font-size:10px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);margin-bottom:4px}
+.masthead h1{font-family:'DM Serif Display',serif;font-size:clamp(26px,4vw,40px);line-height:1;letter-spacing:-.01em}
+.masthead-actions{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.btn{font-family:'DM Sans',sans-serif;font-size:12px;font-weight:500;letter-spacing:.03em;padding:8px 16px;border-radius:2px;cursor:pointer;transition:all .15s;white-space:nowrap}
+.btn-ghost{background:transparent;color:var(--ink-2);border:1.5px solid var(--rule)}
+.btn-ghost:hover{border-color:var(--ink-2);color:var(--ink)}
+.week-chip{font-size:12px;font-weight:500;color:var(--ink-2);padding:5px 14px;background:var(--cream);border:1.5px solid var(--rule);border-radius:2px}
+
+.stats-bar{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--rule);border-bottom:1px solid var(--rule)}
+.stat{background:var(--page);padding:1rem 2rem}
+.stat-num{font-family:'DM Serif Display',serif;font-size:32px;color:var(--ink)}
+.stat-lbl{font-size:11px;color:var(--ink-3);margin-top:2px;letter-spacing:.04em}
+
+.body-wrap{max-width:1200px;margin:0 auto}
+.two-col{display:grid;grid-template-columns:1fr 1fr}
+.col{padding:2rem 3rem;border-right:1px solid var(--rule)}
+.col:last-child{border-right:none}
+
+.sec-label{display:flex;align-items:center;gap:10px;margin-bottom:1rem;margin-top:2rem}
+.col > .sec-label:first-child{margin-top:0}
+.sec-label-text{font-size:10px;font-weight:500;letter-spacing:.13em;text-transform:uppercase;color:var(--ink-3)}
+.sec-label::after{content:'';flex:1;height:1px;background:var(--rule)}
+
+.items{display:flex;flex-direction:column}
+.item{display:flex;align-items:flex-start;gap:10px;padding:11px 0;border-bottom:1px solid var(--rule)}
+.item:last-child{border-bottom:none}
+.item-body{flex:1;min-width:0}
+.item-text{font-size:14px;line-height:1.5;color:var(--ink)}
+.item-meta{font-size:12px;color:var(--ink-3);margin-top:2px}
+.badge{font-size:10px;font-weight:500;letter-spacing:.05em;text-transform:uppercase;padding:3px 8px;border-radius:2px;white-space:nowrap;flex-shrink:0;margin-top:3px}
+.b-blue{background:var(--blue-bg);color:var(--blue)}
+.b-green{background:var(--green-bg);color:var(--green)}
+.b-amber{background:var(--amber-bg);color:var(--amber)}
+.b-red{background:var(--red-bg);color:var(--red)}
+.b-gray{background:var(--cream);color:var(--ink-3)}
+.b-purple{background:var(--purple-bg);color:var(--purple)}
+
+.team-tag{display:inline-block;font-size:10px;font-weight:500;padding:2px 7px;border-radius:2px;margin-bottom:4px}
+
+.reactions{display:flex;gap:6px;flex-wrap:wrap;padding:1rem 0;align-items:center}
+.react-lbl{font-size:11px;color:var(--ink-3);letter-spacing:.04em}
+.rc{font-family:'DM Sans',sans-serif;font-size:12px;padding:5px 12px;border:1px solid var(--rule);border-radius:2px;cursor:pointer;background:transparent;color:var(--ink-2);transition:all .15s}
+.rc:hover{border-color:var(--ink-2);color:var(--ink)}
+.rc.on{background:var(--blue-bg);border-color:var(--blue);color:var(--blue);font-weight:500}
+
+.comment-section{margin-top:1.5rem}
+.comment{display:flex;gap:8px;margin-bottom:10px}
+.av{width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:500;flex-shrink:0;margin-top:2px}
+.av-joy{background:var(--blue-bg);color:var(--blue)}
+.av-jason{background:var(--amber-bg);color:var(--amber)}
+.cb{flex:1;min-width:0}
+.cw{font-size:10px;font-weight:500;color:var(--ink-3);margin-bottom:3px;letter-spacing:.04em;text-transform:uppercase}
+.ct{font-size:13px;color:var(--ink);line-height:1.4;background:var(--cream);padding:8px 10px;border-radius:2px}
+.cdel{background:none;border:none;cursor:pointer;font-size:11px;color:var(--rule);padding:2px;margin-top:4px;transition:color .1s;display:block}
+.cdel:hover{color:var(--accent)}
+.comment-input-row{display:flex;gap:8px;align-items:flex-start;margin-top:10px}
+.comment-ta{flex:1;font-family:'DM Sans',sans-serif;font-size:13px;padding:7px 10px;border:1px solid var(--rule);border-radius:2px;background:white;color:var(--ink);resize:none;outline:none;min-height:36px}
+.comment-ta:focus{border-color:var(--ink-2)}
+.csend{font-family:'DM Sans',sans-serif;font-size:12px;font-weight:500;padding:7px 14px;background:var(--ink);color:var(--page);border:none;border-radius:2px;cursor:pointer;transition:background .15s}
+.csend:hover{background:var(--accent)}
+
+.role-wrap{display:flex;align-items:center;gap:6px}
+.role-lbl{font-size:11px;color:var(--ink-3);letter-spacing:.04em}
+.rtoggle{display:flex;border:1.5px solid var(--rule);border-radius:2px;overflow:hidden}
+.rbtn{font-family:'DM Sans',sans-serif;font-size:12px;font-weight:500;padding:6px 14px;cursor:pointer;border:none;background:transparent;color:var(--ink-2);transition:all .15s}
+.rbtn.active{background:var(--ink);color:var(--page)}
+
+.overlay{display:none;position:fixed;inset:0;background:rgba(26,24,20,.55);z-index:200;align-items:center;justify-content:center}
+.overlay.open{display:flex}
+.modal{background:var(--page);border:2px solid var(--ink);padding:2rem;width:480px;max-width:95vw;max-height:88vh;overflow-y:auto}
+.modal h2{font-family:'DM Serif Display',serif;font-size:22px;margin-bottom:1.25rem}
+.export-text{font-family:monospace;font-size:12px;line-height:1.7;white-space:pre-wrap;background:var(--cream);border:1px solid var(--rule);padding:1rem;max-height:320px;overflow-y:auto;color:var(--ink-2)}
+.modal-actions{display:flex;gap:8px;justify-content:flex-end;margin-top:1.25rem}
+.btn-primary{background:var(--ink);color:var(--page);border:1.5px solid var(--ink)}
+.btn-primary:hover{background:var(--accent);border-color:var(--accent)}
+
+.saved{font-size:11px;color:var(--green);opacity:0;transition:opacity .3s;margin-left:4px}
+.saved.show{opacity:1}
+
+.empty{font-size:13px;color:var(--ink-3);font-style:italic;padding:6px 0 10px}
+
+@media(max-width:700px){
+  .masthead{padding:1.25rem 1.5rem}
+  .two-col{grid-template-columns:1fr}
+  .col{padding:1.5rem;border-right:none;border-bottom:1px solid var(--rule)}
+  .col:last-child{border-bottom:none}
+  .stats-bar{grid-template-columns:1fr 1fr}
+  .stat{padding:.75rem 1.25rem}
+}
+</style>
+</head>
+<body>
+
+<div class="masthead">
+  <div>
+    <div class="kicker">Keller Williams — Industry &amp; Learning</div>
+    <h1>Weekly Status</h1>
+  </div>
+  <div class="masthead-actions">
+    <div class="role-wrap">
+      <span class="role-lbl">View as</span>
+      <div class="rtoggle">
+        <button class="rbtn active" id="rbtn-joy" onclick="setRole('joy')">Joy</button>
+        <button class="rbtn" id="rbtn-jason" onclick="setRole('jason')">Jason</button>
+      </div>
+    </div>
+    <span class="week-chip" id="week-chip"></span>
+    <button class="btn btn-ghost" onclick="openExport()">Export</button>
+    <span class="saved" id="saved">Saved</span>
+  </div>
+</div>
+
+<div class="stats-bar" id="stats-bar"></div>
+
+<div class="body-wrap">
+  <div class="two-col">
+    <div class="col" id="col-left"></div>
+    <div class="col" id="col-right"></div>
+  </div>
+</div>
+
+<div class="overlay" id="export-overlay">
+  <div class="modal">
+    <h2>Export for Jason</h2>
+    <div class="export-text" id="export-body"></div>
+    <div class="modal-actions">
+      <button class="btn btn-ghost" onclick="closeExport()">Close</button>
+      <button class="btn btn-primary" id="copy-btn" onclick="copyExport()">Copy to clipboard</button>
+    </div>
+  </div>
+</div>
+
+<script>
+const STORAGE_KEY = 'kwi_tracker_v4';
+const REACT_OPTS = ['Looks good','Need to discuss','Concerned','Great progress'];
+
+const BAKED_DATA = {
+  projects: [
+    {text:'MBR', team:"Robert's Team", teamCls:'b-blue', meta:'Mona — primary driver', status:'on-track'},
+    {text:'OP Bootcamp', team:"Robert's Team", teamCls:'b-blue', meta:'Robert — primary driver. Interviews this week w/ JP & John Clidy.', status:'on-track'},
+    {text:'ALC Clinic', team:"Robert's Team", teamCls:'b-blue', meta:'Kara — primary driver', status:'on-track'},
+    {text:'Growth Call content', team:"Robert's Team", teamCls:'b-blue', meta:'Kara', status:'on-track'},
+    {text:'KW Productivity Huddles', team:"Robert's Team", teamCls:'b-blue', meta:'Liz & Elizabeth rotating', status:'on-track'},
+    {text:'MREA Models — 1hr classes', team:"Robert's Team", teamCls:'b-blue', meta:'Liz & Elizabeth reached out to KellerInk to get started', status:'on-track'},
+    {text:'Jason Instagram content', team:"Emily's Team", teamCls:'b-green', meta:'Magdalena — in progress', status:'on-track'},
+    {text:'AI Playbook rewrite — one pagers', team:"Emily's Team", teamCls:'b-green', meta:'Hayden reviewing AI Playbooks Vol 1 & 2, rewriting 2–3 with AI focus', status:'on-track'},
+    {text:'Playbook audit/edit process', team:"Emily's Team", teamCls:'b-green', meta:'Emily — 1/month, 2 in October. Building mini-courses (1hr) with Liz/Elizabeth for MCs.', status:'on-track'},
+    {text:'Masterminds', team:'Ops Team', teamCls:'b-amber', meta:'Abbie — all mastermind support. Janelle — touch process.', status:'on-track'},
+    {text:'Roadshow', team:'Ops Team', teamCls:'b-amber', meta:'Kristi sent final to legal. Owen working on new marketing materials.', status:'on-track'},
+    {text:'Connect: Command Your Business', team:'Ops Team', teamCls:'b-amber', meta:'Jenni finished — Joy to review', status:'on-track'},
+    {text:'Course creation process', team:'Joy', teamCls:'b-gray', meta:'Drafting from old working theory + Jason\'s input', status:'on-track'},
+  ],
+  wins: [
+    {text:'CEO Summit — met with all speakers', meta:'Working on getting Rory addresses for book delivery with KW note'},
+    {text:'Connect: Canva Self-Study approved for posting', meta:'4 videos — approved and going live'},
+  ],
+  blockers: [
+    {text:'Jenni job description needs redo per HR', meta:'Joy — action needed'},
+  ],
+  milestones: [
+    {text:'Breakthrough 120 translation quote', meta:'Coming in today. Jenni building process for remaining translations.'},
+    {text:'Learning Center calendar', meta:'Janelle building process + registration tracking for rest of year'},
+    {text:'Family Reunion planning kickoff', meta:'Meeting with Robert, Mona & Kara — starting early'},
+    {text:'MAC prep', meta:'Joy — in progress now'},
+  ]
+};
+
+const STATUS_MAP = {
+  'on-track':{label:'On track',cls:'b-green'},
+  'at-risk':{label:'At risk',cls:'b-amber'},
+  'blocked':{label:'Blocked',cls:'b-red'},
+  'complete':{label:'Complete',cls:'b-blue'},
+};
+
+let role = 'joy';
+
+function weekLabel(){
+  const now = new Date();
+  const day = now.getDay();
+  const diff = day===0?-6:1-day;
+  const mon = new Date(now); mon.setDate(now.getDate()+diff);
+  const fri = new Date(mon); fri.setDate(mon.getDate()+4);
+  const fmt = d=>d.toLocaleDateString('en-US',{month:'short',day:'numeric'});
+  return `${fmt(mon)} – ${fmt(fri)}`;
+}
+
+function loadMeta(){ try{return JSON.parse(localStorage.getItem(STORAGE_KEY))||{reactions:{},comments:[]};}catch{return {reactions:{},comments:[]};} }
+function saveMeta(m){ localStorage.setItem(STORAGE_KEY,JSON.stringify(m)); flash(); }
+function flash(){ const e=document.getElementById('saved'); e.classList.add('show'); setTimeout(()=>e.classList.remove('show'),1600); }
+
+function setRole(r){
+  role=r;
+  document.getElementById('rbtn-joy').classList.toggle('active',r==='joy');
+  document.getElementById('rbtn-jason').classList.toggle('active',r==='jason');
+  render();
+}
+
+function esc(s){ return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
+function render(){
+  document.getElementById('week-chip').textContent = weekLabel();
+
+  const total = BAKED_DATA.projects.length;
+  const complete = BAKED_DATA.projects.filter(p=>p.status==='complete').length;
+  const blocked = BAKED_DATA.projects.filter(p=>p.status==='blocked').length;
+  const wins = BAKED_DATA.wins.length;
+  document.getElementById('stats-bar').innerHTML=`
+    <div class="stat"><div class="stat-num">${total}</div><div class="stat-lbl">Active projects</div></div>
+    <div class="stat"><div class="stat-num">${complete}</div><div class="stat-lbl">Complete</div></div>
+    <div class="stat"><div class="stat-num">${blocked}</div><div class="stat-lbl">Blocked</div></div>
+    <div class="stat"><div class="stat-num">${wins}</div><div class="stat-lbl">Wins this week</div></div>`;
+
+  const left = document.getElementById('col-left');
+  const right = document.getElementById('col-right');
+  left.innerHTML=''; right.innerHTML='';
+
+  left.appendChild(buildSection('Active projects & status', BAKED_DATA.projects, 'projects'));
+  right.appendChild(buildSection('Key wins & highlights', BAKED_DATA.wins, 'wins'));
+  right.appendChild(buildSection('Blockers & risks', BAKED_DATA.blockers, 'blockers'));
+  right.appendChild(buildSection('Upcoming milestones', BAKED_DATA.milestones, 'milestones'));
+  right.appendChild(buildDataAnalytics());
+  right.appendChild(buildReactions());
+  right.appendChild(buildComments());
+}
+
+function buildSection(title, items, type){
+  const wrap = document.createElement('div');
+  const label = document.createElement('div');
+  label.className='sec-label';
+  label.innerHTML=`<span class="sec-label-text">${esc(title)}</span>`;
+  wrap.appendChild(label);
+
+  const list = document.createElement('div');
+  list.className='items';
+
+  if(!items.length){
+    list.innerHTML=`<div class="empty">Nothing this week.</div>`;
+  } else {
+    items.forEach(it=>{
+      const row = document.createElement('div');
+      row.className='item';
+      const teamTag = it.team ? `<div><span class="team-tag ${it.teamCls||'b-gray'}">${esc(it.team)}</span></div>` : '';
+      const badge = type==='projects' ? `<span class="badge ${STATUS_MAP[it.status||'on-track'].cls}">${STATUS_MAP[it.status||'on-track'].label}</span>` : '';
+      const meta = it.meta ? `<div class="item-meta">${esc(it.meta)}</div>` : '';
+      row.innerHTML=`<div class="item-body">${teamTag}<div class="item-text">${esc(it.text)}</div>${meta}</div>${badge}`;
+      list.appendChild(row);
+    });
+  }
+  wrap.appendChild(list);
+  return wrap;
+}
+
+function buildDataAnalytics(){
+  const wrap = document.createElement('div');
+  const label = document.createElement('div');
+  label.className='sec-label';
+  label.innerHTML=`<span class="sec-label-text">Data & analytics</span>`;
+  wrap.appendChild(label);
+  const list = document.createElement('div');
+  list.className='items';
+  const item = document.createElement('div');
+  item.className='item';
+  item.innerHTML=`<div class="item-body">
+    <div class="item-text">Self-Study Data</div>
+    <div class="item-meta"><a href="https://docs.google.com/spreadsheets/d/1Y4AOvoDxUCG2xCwN0Gq7Z1tM7fpbzvehaISLNMzqIC8/edit?gid=1549248158#gid=1549248158" target="_blank" style="color:var(--blue);font-size:12px;text-decoration:none;border-bottom:1px solid var(--blue-bg)">Open spreadsheet →</a></div>
+  </div>`;
+  list.appendChild(item);
+  wrap.appendChild(list);
+  return wrap;
+}
+
+function buildReactions(){
+  const meta = loadMeta();
+  const r = meta.reactions||{};
+  const wrap = document.createElement('div');
+  const label = document.createElement('div');
+  label.className='sec-label';
+  label.innerHTML=`<span class="sec-label-text">Jason's reactions</span>`;
+  wrap.appendChild(label);
+  const reacts = document.createElement('div');
+  reacts.className='reactions';
+  reacts.innerHTML=`<span class="react-lbl">${role==='jason'?'React:':'Reactions:'}</span>`+
+    REACT_OPTS.map(opt=>`<button class="rc${r[opt]?' on':''}" onclick="toggleReact('${opt.replace(/'/g,"\\'")}')">${esc(opt)}</button>`).join('');
+  wrap.appendChild(reacts);
+  return wrap;
+}
+
+function buildComments(){
+  const meta = loadMeta();
+  const comments = meta.comments||[];
+  const wrap = document.createElement('div');
+  wrap.className='comment-section';
+  const label = document.createElement('div');
+  label.className='sec-label';
+  label.innerHTML=`<span class="sec-label-text">Comments (${comments.length})</span>`;
+  wrap.appendChild(label);
+
+  if(!comments.length){
+    const e=document.createElement('div'); e.className='empty'; e.textContent='No comments yet.';
+    wrap.appendChild(e);
+  } else {
+    comments.forEach((c,i)=>{
+      const isJoy=c.who==='joy';
+      const div=document.createElement('div'); div.className='comment';
+      const del=(role===c.who)?`<button class="cdel" onclick="delComment(${i})">✕ remove</button>`:'';
+      div.innerHTML=`<div class="av ${isJoy?'av-joy':'av-jason'}">${isJoy?'JP':'JA'}</div>
+        <div class="cb"><div class="cw">${isJoy?'Joy':'Jason'}</div>
+        <div class="ct">${esc(c.text)}</div>${del}</div>`;
+      wrap.appendChild(div);
+    });
+  }
+
+  const inputRow=document.createElement('div');
+  inputRow.className='comment-input-row';
+  inputRow.innerHTML=`<div class="av ${role==='joy'?'av-joy':'av-jason'}">${role==='joy'?'JP':'JA'}</div>
+    <textarea class="comment-ta" id="comment-ta" placeholder="${role==='joy'?'Joy':'Jason'}, add a comment..." rows="1"></textarea>
+    <button class="csend" onclick="addComment()">Send</button>`;
+  wrap.appendChild(inputRow);
+  return wrap;
+}
+
+function toggleReact(opt){
+  if(role!=='jason') return;
+  const meta=loadMeta();
+  if(!meta.reactions) meta.reactions={};
+  meta.reactions[opt]=!meta.reactions[opt];
+  saveMeta(meta); render();
+}
+
+function addComment(){
+  const ta=document.getElementById('comment-ta');
+  if(!ta) return;
+  const text=ta.value.trim(); if(!text) return;
+  const meta=loadMeta();
+  if(!meta.comments) meta.comments=[];
+  meta.comments.push({who:role,text,ts:Date.now()});
+  saveMeta(meta); render();
+}
+
+function delComment(idx){
+  const meta=loadMeta();
+  meta.comments.splice(idx,1);
+  saveMeta(meta); render();
+}
+
+function buildExportText(){
+  const lines=[`WEEKLY UPDATE — ${weekLabel().toUpperCase()}`,'Joy · Industry & Learning Operations, KWRI',''];
+  lines.push('ACTIVE PROJECTS & STATUS','─'.repeat(38));
+  BAKED_DATA.projects.forEach(p=>lines.push(`• [${p.team}] ${p.text}  [${STATUS_MAP[p.status||'on-track'].label}]${p.meta?' — '+p.meta:''}`));
+  lines.push('');
+  lines.push('KEY WINS & HIGHLIGHTS','─'.repeat(38));
+  BAKED_DATA.wins.forEach(w=>lines.push(`• ${w.text}${w.meta?' — '+w.meta:''}`));
+  lines.push('');
+  lines.push('BLOCKERS & RISKS','─'.repeat(38));
+  BAKED_DATA.blockers.forEach(b=>lines.push(`• ${b.text}${b.meta?' — '+b.meta:''}`));
+  lines.push('');
+  lines.push('UPCOMING MILESTONES','─'.repeat(38));
+  BAKED_DATA.milestones.forEach(m=>lines.push(`• ${m.text}${m.meta?' — '+m.meta:''}`));
+  return lines.join('\n');
+}
+
+function openExport(){ document.getElementById('export-body').textContent=buildExportText(); document.getElementById('export-overlay').classList.add('open'); }
+function closeExport(){ document.getElementById('export-overlay').classList.remove('open'); }
+function copyExport(){
+  navigator.clipboard.writeText(buildExportText()).then(()=>{
+    const btn=document.getElementById('copy-btn');
+    btn.textContent='Copied!';
+    setTimeout(()=>btn.textContent='Copy to clipboard',2000);
+  });
+}
+document.getElementById('export-overlay').addEventListener('click',e=>{ if(e.target===e.currentTarget) closeExport(); });
+
+render();
+</script>
+</body>
+</html>
